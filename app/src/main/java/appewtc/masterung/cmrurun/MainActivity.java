@@ -109,6 +109,11 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(context, "Welcome " + nameUserString,
                             Toast.LENGTH_SHORT).show();
 
+                    Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+                    intent.putExtra("Name", nameUserString);
+                    startActivity(intent);
+                    finish();
+
                 } else {
                     //Password False
                     MyAlert myAlert = new MyAlert();
