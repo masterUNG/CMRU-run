@@ -8,6 +8,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -33,10 +34,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng latLng = new LatLng(cmruLatADouble, cmruLngADouble);
         mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16));
 
+        createStationMarker();
+
 
 
     }   // onMapReady
 
+    private void createStationMarker() {
+
+        MyData myData = new MyData();
+        double[] latDoubles = myData.getLatStationDoubles();
+        double[] lngDoubles = myData.getLngStationDoubles();
+
+        for (int i=0;i<latDoubles.length;i++) {
+            LatLng latLng = new LatLng(latDoubles[i], lngDoubles[i]);
+            mMap.addMarker(new MarkerOptions().position(latLng));
+        }
+
+    }   // createStaionMarker
 
 
 }   // Main Class

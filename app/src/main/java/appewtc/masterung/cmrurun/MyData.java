@@ -10,7 +10,18 @@ public class MyData {
             R.drawable.doremon48, R.drawable.kon48,
             R.drawable.nobita48, R.drawable.rat48};
 
+    private double[] latStationDoubles = new double[]{18.807637, 18.807997, 18.805877, 18.806679};
+    private double[] lngStationDoubles = new double[]{98.985260, 98.987185, 98.987641, 98.986300};
+
     public int[] getAvataInts() {
         return avataInts;
+    }
+
+    public double[] getLatStationDoubles() {
+        return latStationDoubles;
+    }
+
+    public double[] getLngStationDoubles() {
+        return lngStationDoubles;
     }
 }   // Main Class
