@@ -13,6 +13,13 @@ public class MyData {
     private double[] latStationDoubles = new double[]{18.807637, 18.807997, 18.805877, 18.806679};
     private double[] lngStationDoubles = new double[]{98.985260, 98.987185, 98.987641, 98.986300};
 
+    private int[] iconStaionInts = new int[]{R.drawable.build1, R.drawable.build2,
+            R.drawable.build3, R.drawable.build4};
+
+    public int[] getIconStaionInts() {
+        return iconStaionInts;
+    }
+
     public int[] getAvataInts() {
         return avataInts;
     }
