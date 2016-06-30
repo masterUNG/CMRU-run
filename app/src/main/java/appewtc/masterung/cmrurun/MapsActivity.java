@@ -17,6 +17,15 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.squareup.okhttp.Call;
+import com.squareup.okhttp.Callback;
+import com.squareup.okhttp.FormEncodingBuilder;
+import com.squareup.okhttp.OkHttpClient;
+import com.squareup.okhttp.Request;
+import com.squareup.okhttp.RequestBody;
+import com.squareup.okhttp.Response;
+
+import java.io.IOException;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -26,6 +35,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private LocationManager locationManager;
     private Criteria criteria;
     private String userIDString, userNameString;
+    private static final String urlEditLocation = "http://swiftcodingthai.com/cmru/edit_location_master.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -152,7 +162,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d("29JuneV1", "userLat ==> " + userLatADouble);
         Log.d("29JuneV1", "userLng ==> " + userLngADouble);
 
-
+        editLocation();
 
 
         Handler handler = new Handler();
@@ -164,6 +174,32 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }, 3000);
 
     }   // myLoop
+
+    private void editLocation() {
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody requestBody = new FormEncodingBuilder()
+                .add("isAdd", "true")
+                .add("id", userIDString)
+                .add("Lat", Double.toString(userLatADouble))
+                .add("Lng", Double.toString(userLngADouble))
+                .build();
+        Request.Builder builder = new Request.Builder();
+        Request request = builder.url(urlEditLocation).post(requestBody).build();
+        Call call = okHttpClient.newCall(request);
+        call.enqueue(new Callback() {
+            @Override
+            public void onFailure(Request request, IOException e) {
+
+            }
+
+            @Override
+            public void onResponse(Response response) throws IOException {
+
+            }
+        });
+
+    }   // editLocation
 
     private void createStationMarker() {
 
