@@ -236,7 +236,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         synLocation.execute();
 
 
-        Handler handler = new Handler();
+        Handler handler = new Handler();http://swiftcodingthai.com/cmru/get_user_master.php
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
