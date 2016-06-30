@@ -227,6 +227,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         mMap.clear();
 
+
         createStationMarker();
 
         editLocation();
