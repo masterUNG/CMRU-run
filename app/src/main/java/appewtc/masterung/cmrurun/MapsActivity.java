@@ -261,13 +261,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 * Math.cos(deg2rad(latStationDoubles[Integer.parseInt(goldString)]))
                 * Math.cos(deg2rad((userLngADouble - lngStationDoubles[Integer.parseInt(goldString)])));
 
+        douMyDistance = Math.acos(douMyDistance);
+        douMyDistance = rad2deg(douMyDistance);
+
+        douMyDistance = douMyDistance * 60 * 1.1515 * 1.609344 * 1000;
+
+        Log.d("30JuneV2", "myDistance เทียบกัน ฐานที่ " + goldString + " มีค่าเท่ากับ " + douMyDistance);
+
     }   // checkDistance
+
+    private double rad2deg(double douMyDistance) {
+
+        double resutl = 0;
+
+        resutl = douMyDistance * 180 / Math.PI;
+
+        return resutl;
+    }
 
     private double deg2rad(double userLatADouble) {
 
+        double result = 0;
 
+        result = userLatADouble * Math.PI / 180;
 
-        return 0;
+        return result;
     }
 
     private void editLocation() {
