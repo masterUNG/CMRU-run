@@ -263,6 +263,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     }   // checkDistance
 
+    private double deg2rad(double userLatADouble) {
+
+
+
+        return 0;
+    }
+
     private void editLocation() {
 
         OkHttpClient okHttpClient = new OkHttpClient();
