@@ -25,6 +25,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private double userLatADouble, userLngADouble;
     private LocationManager locationManager;
     private Criteria criteria;
+    private String userIDString, userNameString;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +40,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         criteria.setAccuracy(Criteria.ACCURACY_FINE);
         criteria.setAltitudeRequired(false);
         criteria.setBearingRequired(false);
+
+        //Get Value From Intent
+        userIDString = getIntent().getStringExtra("userID");
+        userNameString = getIntent().getStringExtra("Name");
+        Log.d("30JuneV1", "userID ==> " + userIDString);
+        Log.d("30JuneV1", "userName ==> " + userNameString);
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -144,6 +151,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         Log.d("29JuneV1", "userLat ==> " + userLatADouble);
         Log.d("29JuneV1", "userLng ==> " + userLngADouble);
+
+
 
 
         Handler handler = new Handler();
