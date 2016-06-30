@@ -251,7 +251,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private void checkDistance() {
 
-        double douMyDistance = Math.sin(deg2rad(lat1)) * Math.sin(deg2rad(lat2)) + Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * Math.cos(deg2rad(theta));
+        MyData myData = new MyData();
+        double[] latStationDoubles = myData.getLatStationDoubles();
+        double[] lngStationDoubles = myData.getLngStationDoubles();
+
+        double douMyDistance = Math.sin(deg2rad(userLatADouble))
+                * Math.sin(deg2rad(latStationDoubles[Integer.parseInt(goldString)]))
+                + Math.cos(deg2rad(userLatADouble))
+                * Math.cos(deg2rad(latStationDoubles[Integer.parseInt(goldString)]))
+                * Math.cos(deg2rad((userLngADouble - lngStationDoubles[Integer.parseInt(goldString)])));
 
     }   // checkDistance
 
