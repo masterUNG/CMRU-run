@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private static final String urlJSON = "http://swiftcodingthai.com/cmru/get_user_master.php";
     private ImageView imageView;
     private EditText userEditText, passwordEditText;
-    private String userString, passwordString, strID, goldString;
+    private String userString, passwordString, strID, goldString, avataString;
 
 
     @Override
@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
                         nameUserString = jsonObject.getString("Name");
                         strID = jsonObject.getString("id");
                         goldString = jsonObject.getString("Gold");
+                        avataString = jsonObject.getString("Avata");
 
                     }   // if
                 }   // for
@@ -115,6 +116,7 @@ public class MainActivity extends AppCompatActivity {
                     intent.putExtra("Name", nameUserString);
                     intent.putExtra("userID", strID);
                     intent.putExtra("Gold", goldString);
+                    intent.putExtra("Avata", avataString);
                     startActivity(intent);
                     finish();
 
