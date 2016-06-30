@@ -5,6 +5,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
@@ -24,6 +25,9 @@ import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.RequestBody;
 import com.squareup.okhttp.Response;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.io.IOException;
 
@@ -63,6 +67,68 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }       // Main Method
 
+    private class SynLocation extends AsyncTask<Void, Void, String> {
+
+        private static final String urlJSON = "http://swiftcodingthai.com/cmru/get_user_master.php";
+        private MyData myData;
+
+        @Override
+        protected String doInBackground(Void... voids) {
+
+            try {
+
+                OkHttpClient okHttpClient = new OkHttpClient();
+                Request.Builder builder = new Request.Builder();
+                Request request = builder.url(urlJSON).build();
+                Response response = okHttpClient.newCall(request).execute();
+                return response.body().string();
+
+            } catch (Exception e) {
+                Log.d("30JuneV1", "e doIn ==> " + e.toString());
+                return null;
+            }
+
+        }   // doIn
+
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+
+            Log.d("30JuneV1", "JSON ==> " + s);
+
+            myData = new MyData();
+            int[] intIcon = myData.getAvataInts();
+
+
+
+            try {
+
+                JSONArray jsonArray = new JSONArray(s);
+
+                for (int i=0;i<jsonArray.length();i++) {
+
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    String strName = jsonObject.getString("Name");
+                    int iconMarker = intIcon[Integer.parseInt(jsonObject.getString("Avata"))];
+                    double douLat = Double.parseDouble(jsonObject.getString("Lat"));
+                    double douLng = Double.parseDouble(jsonObject.getString("Lng"));
+                    LatLng latLng = new LatLng(douLat, douLng);
+                    mMap.addMarker(new MarkerOptions()
+                    .position(latLng)
+                    .icon(BitmapDescriptorFactory.fromResource(iconMarker))
+                    .title(strName));
+
+
+                }   //for
+
+            } catch (Exception e) {
+                Log.d("30JuneV1", "e onPost ==> " + e.toString());
+            }
+
+        }   // onPost
+    }   // SynLocation Class
+
+
     @Override
     protected void onResume() {
         super.onResume();
@@ -84,8 +150,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             userLngADouble = gpsLocation.getLongitude();
 
         }
-
-
 
 
     }   // onResume
@@ -154,7 +218,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         myLoop();
 
 
-
     }   // onMapReady
 
     private void myLoop() {
@@ -162,7 +225,14 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         Log.d("29JuneV1", "userLat ==> " + userLatADouble);
         Log.d("29JuneV1", "userLng ==> " + userLngADouble);
 
+        mMap.clear();
+
+        createStationMarker();
+
         editLocation();
+
+        SynLocation synLocation = new SynLocation();
+        synLocation.execute();
 
 
         Handler handler = new Handler();
@@ -208,11 +278,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         double[] lngDoubles = myData.getLngStationDoubles();
         int[] iconInts = myData.getIconStaionInts();
 
-        for (int i=0;i<latDoubles.length;i++) {
+        for (int i = 0; i < latDoubles.length; i++) {
             LatLng latLng = new LatLng(latDoubles[i], lngDoubles[i]);
             mMap.addMarker(new MarkerOptions().position(latLng)
-            .icon(BitmapDescriptorFactory.fromResource(iconInts[i]))
-            .title("ด่านที่ " + Integer.toString(i+1)));
+                    .icon(BitmapDescriptorFactory.fromResource(iconInts[i]))
+                    .title("ด่านที่ " + Integer.toString(i + 1)));
         }
 
     }   // createStaionMarker
