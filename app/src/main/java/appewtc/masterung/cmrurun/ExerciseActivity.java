@@ -30,6 +30,7 @@ public class ExerciseActivity extends AppCompatActivity {
             choice3RadioButton, choice4RadioButton;
     private String[] myQuestionStrings, myChoice1Strings, myChoice2Strings,
             myChoice3Strings, myChoice4Strings, myAnswerStrings;
+    private int timesAnInt = 0;
 
 
     @Override
@@ -168,16 +169,27 @@ public class ExerciseActivity extends AppCompatActivity {
 
         //Check Choose
         if (checkChoose()) {
-            //Checked
-
-        } else {
             //UnChecked
             MyAlert myAlert = new MyAlert();
             myAlert.myDialog(this, "ไม่ตอบคำถาม",
                     "กรุณาตอบคำถาม");
 
-        }
+        } else if (timesAnInt < 5) {
 
+            if (timesAnInt != 4) {
+                timesAnInt += 1;
+            }
+
+            questionTextView.setText(Integer.toString(timesAnInt + 1) +
+                    ". " + myQuestionStrings[timesAnInt]);
+            choice1RadioButton.setText(myChoice1Strings[timesAnInt]);
+            choice2RadioButton.setText(myChoice2Strings[timesAnInt]);
+            choice3RadioButton.setText(myChoice3Strings[timesAnInt]);
+            choice4RadioButton.setText(myChoice4Strings[timesAnInt]);
+
+        } else {
+            //End of Times
+        }
 
 
     }   // clickAnswer
@@ -192,11 +204,11 @@ public class ExerciseActivity extends AppCompatActivity {
                 choice4RadioButton.isChecked()) {
 
             //Checked
-            result = true;
+            result = false;
 
         } else {
             //UnChecked
-            result = false;
+            result = true;
         }
 
         return result;
