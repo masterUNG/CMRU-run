@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
+import android.view.View;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -72,6 +73,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
     }       // Main Method
+
+    public void clickListFriend(View view) {
+        startActivity(new Intent(MapsActivity.this, ShowFriendListView.class));
+    }
+
+    public void clickExit(View view) {
+        finish();
+    }
+
 
     private class SynLocation extends AsyncTask<Void, Void, String> {
 
