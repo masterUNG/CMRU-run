@@ -3,6 +3,8 @@ package appewtc.masterung.cmrurun;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.squareup.okhttp.OkHttpClient;
@@ -88,6 +90,13 @@ public class ShowFriendListView extends AppCompatActivity {
                 FriendAdapter friendAdapter = new FriendAdapter(ShowFriendListView.this,
                         avataInts, goldInts, nameStrings);
                 listView.setAdapter(friendAdapter);
+
+                listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+
+                    }
+                });
 
             } catch (Exception e) {
                 e.printStackTrace();
