@@ -145,18 +145,24 @@ public class ExerciseActivity extends AppCompatActivity {
 
                 }   //for
 
+                //Show View Times 1
+                questionTextView.setText("1. " + myQuestionStrings[0]);
+                choice1RadioButton.setText(myChoice1Strings[0]);
+                choice2RadioButton.setText(myChoice2Strings[0]);
+                choice3RadioButton.setText(myChoice3Strings[0]);
+                choice4RadioButton.setText(myChoice4Strings[0]);
 
             } catch (Exception e) {
                 Log.d("1JulyV1", "e onPost ==> " + e.toString());
             }
 
-        }
+        }   // onPost
     }   // SynQuestion Class
 
 
     public void clickAnswer(View view) {
 
-        for (int i=0;i<5;i++) {
+        for (int i = 0; i < 5; i++) {
             Log.d("1JulyV3", "myQuestion(" + i + ") = " + myQuestionStrings[i]);
         }
 
