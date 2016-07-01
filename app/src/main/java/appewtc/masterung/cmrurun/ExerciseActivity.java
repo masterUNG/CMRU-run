@@ -164,8 +164,42 @@ public class ExerciseActivity extends AppCompatActivity {
 
         for (int i = 0; i < 5; i++) {
             Log.d("1JulyV3", "myQuestion(" + i + ") = " + myQuestionStrings[i]);
+        }   // for
+
+        //Check Choose
+        if (checkChoose()) {
+            //Checked
+
+        } else {
+            //UnChecked
+            MyAlert myAlert = new MyAlert();
+            myAlert.myDialog(this, "ไม่ตอบคำถาม",
+                    "กรุณาตอบคำถาม");
+
         }
 
+
+
     }   // clickAnswer
+
+    private boolean checkChoose() {
+
+        boolean result = true;
+
+        if (choice1RadioButton.isChecked() ||
+                choice2RadioButton.isChecked() ||
+                choice3RadioButton.isChecked() ||
+                choice4RadioButton.isChecked()) {
+
+            //Checked
+            result = true;
+
+        } else {
+            //UnChecked
+            result = false;
+        }
+
+        return result;
+    }   // checkChoose
 
 }   // Main Class
